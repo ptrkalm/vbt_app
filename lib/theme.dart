@@ -1,60 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static Color primaryColor = const Color.fromRGBO(243, 176, 7, 1.0);
-  static Color primaryAccent = const Color.fromRGBO(238, 154, 0, 1.0);
-  static Color secondaryColor = const Color.fromRGBO(45, 45, 45, 1);
-  static Color secondaryAccent = const Color.fromRGBO(35, 35, 35, 1);
-  static Color titleColor = const Color.fromRGBO(200, 200, 200, 1);
-  static Color textColor = const Color.fromRGBO(150, 150, 150, 1);
+  static const Color primaryColor = Color.fromRGBO(253, 120, 25, 1.0);
+  static const Color secondaryColor = Color.fromRGBO(148, 147, 181, 1.0);
+  static const Color tertiaryColor = Color.fromRGBO(237, 240, 218, 1.0);
+  static const Color backgroundColor = Color.fromRGBO(29, 29, 29, 1.0);
+  static const Color backgroundColorAccent = Color.fromRGBO(14, 14, 14, 1.0);
+  static const Color titleColor = Color.fromRGBO(236, 236, 236, 1.0);
+  static const Color textColor = Color.fromRGBO(211, 211, 211, 1.0);
 }
 
 ThemeData primaryTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: AppColors.primaryColor,
-  ),
-
-  scaffoldBackgroundColor: AppColors.secondaryAccent,
-
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.secondaryColor,
-    foregroundColor: AppColors.textColor,
-    centerTitle: true
-  ),
-
-  textTheme: TextTheme(
-    bodyMedium: TextStyle(
-      color: AppColors.textColor,
-      fontSize: 14,
-      letterSpacing: 0.8,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.primaryColor,
     ),
-    headlineMedium: TextStyle(
-      color: AppColors.titleColor,
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 1
-    ),
-    titleMedium: TextStyle(
-      color: AppColors.titleColor,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 1
-    ),
-  ),
 
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.titleColor,
-      foregroundColor: AppColors.secondaryColor,
-      overlayColor: AppColors.secondaryColor.withOpacity(0.2),
-    )
-  ),
+    scaffoldBackgroundColor: AppColors.backgroundColorAccent,
 
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      disabledBackgroundColor: AppColors.secondaryAccent,
-      disabledForegroundColor: AppColors.textColor.withOpacity(0.5),
-      side: BorderSide(color: AppColors.textColor.withOpacity(0.5))
+    appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.backgroundColor,
+        foregroundColor: AppColors.textColor,
+        centerTitle: true),
+
+    fontFamily: GoogleFonts.kanit().fontFamily,
+    textTheme: const TextTheme(
+      bodySmall: TextStyle(
+        fontFeatures: <FontFeature>[
+          FontFeature.fractions()
+        ],
+        color: AppColors.textColor,
+        fontSize: 14,
+        letterSpacing: 0.8,
+      ),
+      bodyMedium: TextStyle(
+        color: AppColors.textColor,
+        fontSize: 16,
+        letterSpacing: 1,
+      ),
+      bodyLarge: TextStyle(
+        color: AppColors.textColor,
+        fontSize: 24,
+        letterSpacing: 1,
+      ),
+      headlineSmall: TextStyle(
+          color: AppColors.titleColor,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1),
+      headlineMedium: TextStyle(
+          color: AppColors.titleColor,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1),
+      headlineLarge: TextStyle(
+          color: AppColors.titleColor,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1),
+      titleMedium: TextStyle(
+          color: AppColors.titleColor,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1),
+      titleLarge: TextStyle(
+          color: AppColors.titleColor,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1),
     ),
-  )
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.titleColor,
+            foregroundColor: AppColors.backgroundColor)),
+
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+          backgroundColor: AppColors.backgroundColorAccent,
+          foregroundColor: AppColors.primaryColor,
+          disabledForegroundColor: AppColors.textColor.withOpacity(0.3)
+      ).copyWith(
+          side: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return BorderSide(color: AppColors.textColor.withOpacity(0.3));
+            }
+            return const BorderSide(color: AppColors.primaryColor);
+          })
+        ),
+    ),
+
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: AppColors.backgroundColor,
+        selectedItemColor: AppColors.primaryColor,
+        unselectedItemColor: AppColors.secondaryColor),
+
+    sliderTheme: const SliderThemeData(
+      activeTrackColor: AppColors.primaryColor,
+      inactiveTrackColor: Colors.white12,
+      thumbColor: AppColors.primaryColor,
+    ),
+
+    inputDecorationTheme: const InputDecorationTheme(
+      labelStyle: TextStyle(color: AppColors.textColor)
+    ),
+
+    splashFactory: NoSplash.splashFactory
 );

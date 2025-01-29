@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "27587070549",
+    "project_id": "flutter-masterclass-ca723",
+    "storage_bucket": "flutter-masterclass-ca723.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27587070549:android:20e32b1e1329f7fa3fa2dc",
+        "android_client_info": {
+          "package_name": "com.example.flutter_masterclass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-UcH8wjE4T6tO8zK0N-Y6L7z0h-OAG-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27587070549:android:d634f822169551203fa2dc",
+        "android_client_info": {
+          "package_name": "ptrkalm.vbt.vbt_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-UcH8wjE4T6tO8zK0N-Y6L7z0h-OAG-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

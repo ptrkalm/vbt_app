@@ -1,6 +1,6 @@
 # vbt_app
 
-Velocity Based Trainign Application.
+Velocity Based Training Application.
 
 ## Getting Started
 

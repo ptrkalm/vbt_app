@@ -1,65 +1,25 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart' hide BluetoothService;
-import 'package:provider/provider.dart';
-import 'package:vbt_app/services/bluetooth_store/bluetooth_store.dart';
-import 'package:vbt_app/shared/styled_text.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vbt_app/screens/device/connected_device_screen.dart';
+import 'package:vbt_app/screens/device/scanning/scanning_screen.dart';
+import 'package:vbt_app/services/bluetooth/device_providers.dart';
 
-class DeviceScreen extends StatefulWidget {
-  final BluetoothDevice device;
-
-  const DeviceScreen({
-    super.key,
-    required this.device
-  });
+class DeviceScreen extends ConsumerStatefulWidget {
+  const DeviceScreen({super.key});
 
   @override
-  State<DeviceScreen> createState() => _DeviceScreenState();
+  ConsumerState<DeviceScreen> createState() => _DeviceScreenState();
 }
 
-class _DeviceScreenState extends State<DeviceScreen> {
-  late BluetoothStore bluetoothStore;
-
-  @override
-  void initState() {
-    super.initState();
-    bluetoothStore = Provider.of<BluetoothStore>(context, listen: false);
-    bluetoothStore.discover(widget.device);
-  }
-
+class _DeviceScreenState extends ConsumerState<DeviceScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: StyledTitle(widget.device.advName),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: Consumer<BluetoothStore>(
-                builder: (context, bluetoothStore, child) {
-                  return LineChart(LineChartData(
-                    lineBarsData: [
-                      LineChartBarData(
-                        spots: bluetoothStore.lastValues.indexed.map((spot) {
-                          return FlSpot(spot.$1.toDouble(), spot.$2);
-                        }).toList()
-                      ),
-                      LineChartBarData(
-                        spots: bluetoothStore.smoothedValues.indexed.map((spot) {
-                          return FlSpot(spot.$1.toDouble(), spot.$2);
-                        }).toList(),
-                        color: Colors.amber
-                      ),
-                    ]
-                  ));
-                },
-              ),
-            ),
-          ],
-        )
-      ),
-    );
+    final deviceState = ref.watch(vbtDeviceStateProvider);
+
+    if (deviceState.isReallyConnected()) {
+      return ConnectedDeviceScreen(device: deviceState.connectedDevice!);
+    } else {
+      return const ScanningScreen();
+    }
   }
 }
